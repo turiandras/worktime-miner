@@ -1,1 +1,14 @@
-The main goal here is to assist employees working in front of computers to remember exactly how much hours did they spent in front of their workstation each day.
+The main goal here is to assist employees working in front of computers to remember exactly how much hours did they spent in front of their workstation each day. The scripts analyze Windows uptime data. If your working time correlates with your machine's uptime, then you are good to go. 
+
+naplo.bat is a simple windows batch file, reading Windows 7 event logs, filtering specially for startup and shutdown events. It will extract the needed information to a file called data.dat. You can inspect it using any texteditor.
+
+napl.py is a python script, which analyzes the data in data.dat. It reads the raw startup/shutdown timing data, and displays daily uptime statistics, and averages per week.
+The script only understands the most simple case: 1 startup and 1 shutdown per day.
+If it cannot understand the events of any day, then it will display the events themselves.
+The actual today will be always such an example, because at the time you run the script the machine obviously not entered shutdown yet.
+
+By default, only the last 30 events (15 ideal workdays) will be queried. You can override this giving a numerical parameter to naplo.bat, like:
+naplo.bat 100
+
+
+
