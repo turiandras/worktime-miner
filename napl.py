@@ -42,6 +42,8 @@ class Time:
 		self.norm()
 	
 	def divideBy(self,divider):
+		if divider == 0:
+			return Time(0,0)
 		min = self.hours*60 + self.minutes
 		result_min = min/divider
 		result = Time(0,result_min)
