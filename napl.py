@@ -59,26 +59,26 @@ def main():
 	times = {}
 	lastDayOfWeek = None
 	lastDay = None
-	for day in sorted(days.iterkeys(),reverse=True):
+	for day in sorted(days.keys(),reverse=True):
 		if lastDayOfWeek == "Monday":
 			calculate_avarage_for_week_starting_on(lastDay,times)
-			print ""
-			print ""
+			print("")
+			print("")
 		lastDayOfWeek = dayOfWeek[string2date(day).weekday()]
 		label_for_day = day + " " + lastDayOfWeek
 		lastDay = day
 		try:
 			times[day] = calculate_daily_work_time(days[day])
-			print label_for_day, times[day]
+			print(label_for_day, times[day] )
 			if showEntries:
 				for value in days[day]:
-					print "\t", value
+					print("\t", value)
 		except Exception as ex:
-			print label_for_day, "bogus daily windows-lifecycle:", ex
+			print(label_for_day, "bogus daily windows-lifecycle:", ex )
 			for value in days[day]:
-				print "\t", value
+				print("\t", value)
 				
-	# for day in sorted(times.iterkeys(),reverse=True):
+	# for day in sorted(times.keys(),reverse=True):
 		# print day, times[day]
 				
 def process_input_into_dict_of_lists_of_logevents_groupedby_date():
@@ -100,14 +100,14 @@ def calculate_avarage_for_week_starting_on(day,times):
 	monday = string2date(day)
 	count = 0
 	sum = Time(0,0)
-	for day in sorted(times.iterkeys()):
+	for day in sorted(times.keys()):
 		if (string2date(day) - monday) > timedelta(days = 4):
 			# we went to far in the future for this week's workdays
 			break
 		sum.plus(times[day])
 		count += 1
-		# print "\t\t",day, count, times[day], sum, sum.divideBy(count)
-	print "\t\t", "calculated weekly avarage over %d days:" % (count,), sum.divideBy(count), "Total:", sum
+		# print("\t\t",day, count, times[day], sum, sum.divideBy(count))
+	print("\t\t", "calculated weekly avarage over %d days:" % (count,), sum.divideBy(count), "Total:", sum  )
 	
 		
 def calculate_daily_work_time(events):
